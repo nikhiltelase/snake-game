@@ -32,8 +32,8 @@
 
            <!-- game-over -->
            <div class="game-over w-full h-full absolute flex justify-center items-center flex-col" style="display: none;">
-                <h1 class="text-3xl text-green-600 font-bold" style="display: block;">Game Over</h1>
-                <p class="mb-4 text-center cursor-pointer">
+                <h1 class="text-3xl text-green-600 font-bold">Game Over</h1>
+                <p id="playAgain" class="mb-4 text-center cursor-pointer">
                     play again <img src="media/refresh.png" class="w-5 cursor-pointer inline hover:scale-110" alt="">
                 </p>
            </div>
@@ -47,7 +47,8 @@
            </section>
 
         </div> 
-        <button id="startGame" class="bg-green-500 outline-none rounded-lg p-3 mt-3 text-white font-bold shadow-2xl ">Start game</button>   
+        <!-- start button -->
+        <button id="startGame" class="bg-green-500 hover:bg-green-600 outline-none rounded-lg p-3 mt-3 text-white font-bold shadow-2xl ">Start game</button>   
         <p class="guidence" style="display: none;"></p>
         
         <!-- arrow buttons -->
