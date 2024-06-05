@@ -6,14 +6,15 @@
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+    text-shadow: 2px 2px 4px rgba(12, 194, 66, 0.456);
 }
 .food{
     position: absolute;
-    font-size: 2em;
+    font-size: 30px;
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
-    
+    text-shadow: 2px 2px 4px rgba(4, 57, 12, 0.679);
 }
 .secore{
     -webkit-user-select: none; /* Safari */

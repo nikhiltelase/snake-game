@@ -12,7 +12,7 @@
 
 <body>
     <main class="h-screen w-full flex flex-col justify-center items-center ">
-        <h1 class="secore text-3xl  text-green-500 font-bold">Secore: 0</h1>
+        <h1 class="score text-3xl  text-green-500 font-bold">Secore: 0</h1>
         <div class="container w-[350px] h-[450px] relative rounded-2xl border border-green-500 shadow-zinc-500 shadow-2xl">
             <!-- snake -->
             <section class="snkae-container">
@@ -27,8 +27,9 @@
 
            <!-- food -->
            <section>
-                <div class="food">🍅</div>
+                <div class="food"></div>
            </section>
+
            <!-- game-over -->
            <div class="game-over w-full h-full absolute flex justify-center items-center flex-col" style="display: none;">
                 <h1 class="text-3xl text-green-600 font-bold" style="display: block;">Game Over</h1>
@@ -36,9 +37,10 @@
                     play again <img src="media/refresh.png" class="w-5 cursor-pointer inline hover:scale-110" alt="">
                 </p>
            </div>
+
            <!-- audio -->
            <section>
-                <audio src="media/background_music.mp3" id="bg-sound"></audio>
+                <audio src="media/background_music.mp3" id="bg-sound" loop></audio>
                 <audio src="media/eat_food.mp3" id="eat-sound"></audio>
                 <audio src="media/turning sound.mp3" id="turn-sound"></audio>
                 <audio src="media/game_over.mp3" id="over-sound"></audio>
@@ -47,8 +49,9 @@
         </div> 
         <button onclick="startGame()" class="bg-green-500 outline-none rounded-lg p-3 mt-3 text-white font-bold shadow-2xl ">Start game</button>   
         <p class="guidence"></p>
+        
         <!-- arrow buttons -->
-        <div class="flex flex-col w-36 h-20">
+        <div class="flex flex-col w-36 h-20" style="display: none;">
             <button class="text-white bg-green-500 rounded-2xl text-3xl self-center"><i class='bx bx-up-arrow-alt' ></i></button>
            <div class="flex justify-between">
             <button class="text-white bg-green-500 rounded-2xl text-3xl self-start"><i class='bx bx-left-arrow-alt' ></i></button>

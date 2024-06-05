@@ -9,27 +9,27 @@ guidence.textContent = "Press Enter To Start Game"
 let playAgain = false;
 
 let startingPostion = [
+    {l:18, t:0},
+    {l:15, t:0},
+    {l:12, t:0},
+    {l:9, t:0},
     {l:6, t:0},
-    {l:5, t:0},
-    {l:4, t:0},
     {l:3, t:0},
-    {l:2, t:0},
-    {l:1, t:0},
 ];
 //create snake
 startingPostion.forEach((postion, index) => {
     let l = postion.l;
     let t = postion.t;
     let segment = segments[index]
-    segment.style.left = `${l}%`;
-    segment.style.top = `${t}%`;
+    segment.style.left = `${l}px`;
+    segment.style.top = `${t}px`;
 })
 //move snake head
 let head = segments[0];
 let topPostion = 0;
-let leftPostion = 6;
+let leftPostion = 18;
 let snakeDirection = "right";
-let step = 1;
+let step = 10;
 
 function moveHead(direction){
     switch (direction) {
@@ -53,8 +53,8 @@ function moveHead(direction){
             break;
     }
 
-    head.style.left = `${leftPostion}%`;
-    head.style.top = `${topPostion}%`;
+    head.style.left = `${leftPostion}px`;
+    head.style.top = `${topPostion}px`;
 }
 //move snake body
 function moveBody(){
@@ -94,11 +94,15 @@ function extendSnake(){
 let foodLeft ;
 let foodTop ;
 function refreshFood(){
+    let foodArray = ["🍎", "🍍", "🍉", "🍅", "🍑", "🍓", "🥝", "🍒", "🍈", "🍇", "🍋", "🥕", "🍏", "🍐"]
+    let randomIndex = Math.floor(Math.random() * foodArray.length);
+
     let food = document.querySelector(".food");
-    let randomLeft = Math.floor(Math.random() * 91) ;
-    let randomTop = Math.floor(Math.random() * 91) ;
-    food.style.left = `${randomLeft}%`;
-    food.style.top = `${randomTop}%`;
+    food.textContent = foodArray[randomIndex];
+    let randomLeft = Math.floor(Math.random() * 308) ;
+    let randomTop = Math.floor(Math.random() * 408) ;
+    food.style.left = `${randomLeft}px`;
+    food.style.top = `${randomTop}px`;
 
     foodLeft = randomLeft;
     foodTop = randomTop;
@@ -112,13 +116,13 @@ function detect(){
 
     let i = 6;
     while (i < currnetSegments.length) {
-        let bodyLeftPosition  = Number(currnetSegments[i].style.left.replace("%", ""));
-        let leftDistence = bodyLeftPosition - leftPostion;
-        let numLeftDistence = Number(String(leftDistence).replace("-", ""));
+        // let bodyLeftPosition  = Number(currnetSegments[i].style.left.replace("px", ""));
+        // let leftDistence = bodyLeftPosition - leftPostion;
+        // let numLeftDistence = Number(String(leftDistence).replace("-", ""));
 
-        let bodyTopPosition  = Number(currnetSegments[i].style.top.replace("%", ""));
-        let topDistence = bodyTopPosition -topPostion;
-        let numtopDistence = Number(String(topDistence).replace("-", ""));
+        // let bodyTopPosition  = Number(currnetSegments[i].style.top.replace("px", ""));
+        // let topDistence = bodyTopPosition -topPostion;
+        // let numtopDistence = Number(String(topDistence).replace("-", ""));
 
         // if (numLeftDistence == 2 && numtopDistence == 2){
         //     return true
@@ -150,7 +154,7 @@ window.addEventListener('keydown', (event) => {
             //check snake direction not equal to down than turn it up
             if (head.style.transform !== "rotate(90deg)"){
                 snakeDirection = "up";
-                // head.style.transform = "rotate(268deg)";
+                head.style.transform = "rotate(268deg)";
                 // turnAudio.play();
             }
             break;
@@ -159,7 +163,7 @@ window.addEventListener('keydown', (event) => {
             //check snake direction not equal to up than turn it down
             if (head.style.transform !== "rotate(268deg)"){
                 snakeDirection = "down";
-                // head.style.transform = "rotate(90deg)";
+                head.style.transform = "rotate(90deg)";
                 // turnAudio.play();
             }
             break;
@@ -168,7 +172,7 @@ window.addEventListener('keydown', (event) => {
             //check snake direction not equal to right than turn it left
            if (head.style.transform !== "rotate(0deg)") {
                snakeDirection = "left";
-            //    head.style.transform = "rotate(180deg)";       
+               head.style.transform = "rotate(180deg)";       
             //    turnAudio.play();
            }
             break;
@@ -177,7 +181,7 @@ window.addEventListener('keydown', (event) => {
         //check snake direction not equal to left than turn it right
             if (head.style.transform !== "rotate(180deg)"){
                 snakeDirection = "right";
-                // head.style.transform = "rotate(0deg)";
+                head.style.transform = "rotate(0deg)";
                 // turnAudio.play();
             }
             break;
@@ -191,8 +195,10 @@ window.addEventListener('keydown', (event) => {
 
 function startGame(){
     // bgAudio.play();
-    let secoreElement = document.querySelector(".secore");
-    let secore = 0;
+    bgAudio.volume = 0.2;
+    overAudio.volume = 0.4;
+    let scoreElement = document.querySelector(".score");
+    let score = 0;
     //game loop
     let startGame = setInterval(() => {
     moveHead(snakeDirection);
@@ -201,35 +207,40 @@ function startGame(){
     let topDistence = foodTop - topPostion;
     let leftDistence = foodLeft - leftPostion;
     let numTopDistence = Number(String(topDistence).replace("-", ""));
+    console.log("top: ", numTopDistence);
     let numLeftDistence = Number(String(leftDistence).replace("-", ""));
+    console.log("left: ", numLeftDistence);
+
     // detect collistion with food
-    if (numTopDistence < 5 && numLeftDistence < 5 ){
-        refreshFood();
+    if (numTopDistence < 15 && numLeftDistence < 15 ){
+        // refreshFood();
         extendSnake();   
+
         //update secore 
-        secore += 1;
-        secoreElement.textContent = `Secore: ${secore}`; 
+        score += 1;
+        scoreElement.textContent = `Score: ${score}`; 
         eatAudio.play()
+        // clearInterval(startGame);
     }
     //detect collition with wall
-    if (topPostion > 92 || topPostion < -1 || leftPostion > 91 || leftPostion < -2){
-        // bgAudio.pause();
+    if (topPostion > 418 || topPostion < -8 || leftPostion > 318 || leftPostion < -8){
         gameOver.style.display = "flex";
         guidence.textContent = "Press Sift To Play Again.."
         playAgain = true;
-        overAudio.play();
         clearInterval(startGame);
+        bgAudio.pause();
+        overAudio.play();
     }
     //detect collition with tail
     if (detect()){
-        // bgAudio.pause();
         gameOver.style.display = "flex";
         playAgain = true;
-        overAudio.play();
         clearInterval(startGame);
+        bgAudio.pause();
+        overAudio.play();
     }
 
-}, 70);
+}, 80);
 
 }
 
@@ -238,3 +249,4 @@ let gameOver = document.querySelector(".game-over");
 gameOver.addEventListener("click", () => {
     location.reload();
 });
+
