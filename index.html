@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>snake game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="h-screen w-full flex flex-col justify-center items-center ">
+        <h1 class="secore text-3xl  text-green-500 font-bold">Secore: 0</h1>
+        <div class="container w-[450px] h-[450px] relative rounded-2xl shadow-zinc-500 shadow-2xl">
+            <!-- snake -->
+            <section class="snkae-container">
+                <div class="snake head">🔴</div>
+                <div class="snake">🔴</div>
+                <div class="snake">🟢</div>
+                <div class="snake">🟢</div>
+                <div class="snake">🟢</div>
+                <div class="snake">🟢</div>
+                <div class="snake">🟢</div>
+            </section>
+
+           <!-- food -->
+           <section>
+                <div class="food">🍅</div>
+           </section>
+           <!-- game-over -->
+           <div class="game-over w-full h-full absolute flex justify-center items-center flex-col" style="display: none;">
+                <h1 class="text-3xl text-green-600 font-bold" style="display: block;">Game Over</h1>
+                <p class="mb-4 text-center cursor-pointer">
+                    play again <img src="media/refresh.png" class="w-5 cursor-pointer inline hover:scale-110" alt="">
+                </p>
+           </div>
+           <!-- audio -->
+           <section>
+                <audio src="media/background_music.mp3" id="bg-sound"></audio>
+                <audio src="media/eat_food.mp3" id="eat-sound"></audio>
+                <audio src="media/turning sound.mp3" id="turn-sound"></audio>
+                <audio src="media/game_over.mp3" id="over-sound"></audio>
+           </section>
+
+        </div> 
+        <button onclick="startGame()" class="bg-green-500 outline-none rounded-lg p-3 mt-3 text-white font-bold shadow-2xl ">Start game</button>   
+        <p class="guidence"></p>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

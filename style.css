@@ -1,0 +1,25 @@
+.snake{
+    position: absolute;
+    font-size: x-large;
+    transition-duration: 300ms;
+    z-index: 9;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+.food{
+    position: absolute;
+    font-size: 2em;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    
+}
+.secore{
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+.head{
+    z-index: 99;
+}
