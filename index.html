@@ -47,17 +47,17 @@
            </section>
 
         </div> 
-        <button onclick="startGame()" class="bg-green-500 outline-none rounded-lg p-3 mt-3 text-white font-bold shadow-2xl ">Start game</button>   
-        <p class="guidence"></p>
+        <button id="startGame" class="bg-green-500 outline-none rounded-lg p-3 mt-3 text-white font-bold shadow-2xl ">Start game</button>   
+        <p class="guidence" style="display: none;"></p>
         
         <!-- arrow buttons -->
-        <div class="flex flex-col w-36 h-20" style="display: none;">
-            <button class="text-white bg-green-500 rounded-2xl text-3xl self-center"><i class='bx bx-up-arrow-alt' ></i></button>
-           <div class="flex justify-between">
-            <button class="text-white bg-green-500 rounded-2xl text-3xl self-start"><i class='bx bx-left-arrow-alt' ></i></button>
-            <button class="text-white bg-green-500 rounded-2xl text-3xl self-end"><i class='bx bx-right-arrow-alt' ></i></button>
-           </div>
-            <button class="text-white bg-green-500 rounded-2xl text-3xl self-center"><i class='bx bx-down-arrow-alt' ></i></button>
+        <div class="flex flex-col w-36 h-20 mt-2" style="display: flex;">
+            <button onclick="moveUp()" class="outline-none hover:bg-green-600 text-white bg-green-500 rounded-2xl text-3xl self-center up-button"><i class='bx bx-up-arrow-alt' ></i></button>
+            <div class="flex justify-between">
+                    <button onclick="moveLeft()" class="outline-none hover:bg-green-600 text-white bg-green-500 rounded-2xl text-3xl self-start left-button"><i class='bx bx-left-arrow-alt' ></i></button>
+                    <button onclick="moveRight()" class="outline-none hover:bg-green-600 text-white bg-green-500 rounded-2xl text-3xl self-end righit-button"><i class='bx bx-right-arrow-alt' ></i></button>
+            </div>
+            <button onclick="moveDown()" class="outline-none hover:bg-green-600 text-white bg-green-500 rounded-2xl text-3xl self-center down-button"><i class='bx bx-down-arrow-alt' ></i></button>
         </div>
     </main>
     <script src="script.js"></script>
