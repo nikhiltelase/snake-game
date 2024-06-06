@@ -66,28 +66,28 @@ function moveUp(){
     if (snakeDirection !== "down"){
         snakeDirection = "up";
         head.style.transform = "rotate(268deg)";
-        // turnAudio.play();
+        turnAudio.play();
     }
 }
 function moveDown(){
     if (snakeDirection !== "up"){
         snakeDirection = "down";
         head.style.transform = "rotate(90deg)";
-        // turnAudio.play();
+        turnAudio.play();
     }
 }
 function moveLeft(){
     if (snakeDirection!== "right") {
         snakeDirection = "left";
         head.style.transform = "rotate(180deg)";       
-     //    turnAudio.play();
+        turnAudio.play();
     }
 }
 function moveRight(){
     if (snakeDirection !== "left"){
         snakeDirection = "right";
         head.style.transform = "rotate(0deg)";
-        // turnAudio.play();
+        turnAudio.play();
     }
 }
 
@@ -124,17 +124,6 @@ function detectBody(){
     let currnetSegments = document.querySelectorAll(".snake");
 
     for (let i = 2; i < currnetSegments.length; i++) {
-        // let bodyLeftPosition  = Number(currnetSegments[i].style.left.replace("px", ""));
-        // let leftDistence = bodyLeftPosition - leftPostion;
-        // let numLeftDistence = Number(String(leftDistence).replace("-", ""));
-
-        // let bodyTopPosition  = Number(currnetSegments[i].style.top.replace("px", ""));
-        // let topDistence = bodyTopPosition -topPostion;
-        // let numtopDistence = Number(String(topDistence).replace("-", ""));
-
-        // if (numLeftDistence == 2 && numtopDistence == 2){
-        //     return true
-        // }
         if (head.style.left == currnetSegments[i].style.left && head.style.top == currnetSegments[i].style.top){  
             return true
         }  
@@ -143,7 +132,7 @@ function detectBody(){
 
 //start game
 function startGame(){
-    // bgAudio.play();
+    bgAudio.play();
     let startGame = setInterval(() => {
     moveHead(snakeDirection);
     moveBody();
@@ -162,7 +151,7 @@ function startGame(){
         extendSnake();   
         score += 1;
         scoreElement.textContent = `Score: ${score}`; 
-        // eatAudio.play()
+        eatAudio.play()
     }
     //detect collition with wall
     if (topPostion >= 425|| topPostion < -5 || leftPostion >= 332|| leftPostion < -5){
@@ -171,7 +160,7 @@ function startGame(){
         playAgain = true;
         clearInterval(startGame);
         bgAudio.pause();
-        // overAudio.play();
+        overAudio.play();
         return
     }
     //detect collition with body
@@ -180,7 +169,7 @@ function startGame(){
         playAgain = true;
         clearInterval(startGame);
         bgAudio.pause();
-        // overAudio.play();
+        overAudio.play();
         return
     }
 }, 100);
@@ -190,8 +179,6 @@ function startGame(){
 function resetSnake(){
     snakeContainer.innerHTML = `
     <div class="snake head">🔴</div>
-    <div class="snake">🔴</div>
-    <div class="snake">🟢</div>
     <div class="snake">🟢</div>
     <div class="snake">🟢</div>
     <div class="snake">🟢</div>
@@ -276,9 +263,9 @@ window.addEventListener('keydown', (event) => {
 let guidContainer = document.querySelector(".guide-container");
 let arrowbuttons = document.querySelector(".arrow-buttons");
 
-const mql = window.matchMedia("(max-width: 500px)");
+const gameScreen = window.matchMedia("(max-width: 500px)");
 
-if (mql.matches) {
+if (gameScreen.matches) {
     guidContainer.style.display = "none";
     arrowbuttons.style.display = "flex";
 }
