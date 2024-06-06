@@ -108,7 +108,7 @@ function extendSnake(){
 let foodLeft ;
 let foodTop ;
 function refreshFood(){
-    let foodArray = ["🍎", "🍍", "🍉", "🍅", "🍑", "🍓", "🥝", "🍒", "🍈", "🍇", "🍋", "🥕", "🍏", "🍐"]
+    let foodArray = ["🍎", "🍍", "🍉", "🍑", "🍓", "🥝", "🍒", "🍈", "🥕", "🍏", "🍐"]
     let randomIndex = Math.floor(Math.random() * foodArray.length);
     let food = document.querySelector(".food");
     foodTop = Math.floor(Math.random() * 408) ;
