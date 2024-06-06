@@ -11,9 +11,12 @@
 </head>
 
 <body>
-    <main class="h-screen w-full flex flex-col justify-center items-center ">
-        <h1 class="score text-3xl  text-green-500 font-bold">Secore: 0</h1>
-        <div class="container w-[350px] h-[450px] relative rounded-2xl border border-green-500 shadow-zinc-500 shadow-2xl">
+    <main class="h-screen w-full flex flex-col justify-center items-center">
+        <div class="flex justify-between w-[350px]">
+            <h1 class="score text-2xl  text-green-500 ml-2">Score: 0</h1>
+            <h1 class="hight-score text-2xl  text-green-500 mr-2">High Score: 0</h1>
+        </div>
+        <div class="container w-[350px] h-[450px] relative rounded-2xl border border-green-500 shadow-2xl">
             <!-- snake -->
             <section class="snkae-container">
                 <div class="snake head">🔴</div>
@@ -49,16 +52,20 @@
         </div> 
         <!-- start button -->
         <button id="startGame" class="bg-green-500 hover:bg-green-600 outline-none rounded-lg p-3 mt-3 text-white font-bold shadow-2xl ">Start game</button>   
-        <p class="guidence" style="display: none;"></p>
+        
+        <div style="display: block;" class="guide-container">
+            <p class="guidence text-center"></p>
+            <p class="text-center">Control Snake using arrow keybord arrow key.</p>
+        </div>
         
         <!-- arrow buttons -->
-        <div class="flex flex-col w-36 h-20 mt-2" style="display: flex;">
-            <button onclick="moveUp()" class="outline-none hover:bg-green-600 text-white bg-green-500 rounded-2xl text-3xl self-center up-button"><i class='bx bx-up-arrow-alt' ></i></button>
+        <div class="arrow-buttons flex flex-col w-36 h-20 mt-2" style="display: none;">
+            <button onclick="moveUp()" class="outline-none hover:bg-green-600 text-white bg-green-500 rounded-2xl text-4xl self-center up-button"><i class='bx bx-up-arrow-alt' ></i></button>
             <div class="flex justify-between">
-                    <button onclick="moveLeft()" class="outline-none hover:bg-green-600 text-white bg-green-500 rounded-2xl text-3xl self-start left-button"><i class='bx bx-left-arrow-alt' ></i></button>
-                    <button onclick="moveRight()" class="outline-none hover:bg-green-600 text-white bg-green-500 rounded-2xl text-3xl self-end righit-button"><i class='bx bx-right-arrow-alt' ></i></button>
+                    <button onclick="moveLeft()" class="outline-none hover:bg-green-600 text-white bg-green-500 rounded-2xl text-4xl self-start left-button"><i class='bx bx-left-arrow-alt' ></i></button>
+                    <button onclick="moveRight()" class="outline-none hover:bg-green-600 text-white bg-green-500 rounded-2xl text-4xl self-end righit-button"><i class='bx bx-right-arrow-alt' ></i></button>
             </div>
-            <button onclick="moveDown()" class="outline-none hover:bg-green-600 text-white bg-green-500 rounded-2xl text-3xl self-center down-button"><i class='bx bx-down-arrow-alt' ></i></button>
+            <button onclick="moveDown()" class="outline-none hover:bg-green-600 text-white bg-green-500 rounded-2xl text-4xl self-center down-button"><i class='bx bx-down-arrow-alt' ></i></button>
         </div>
     </main>
     <script src="script.js"></script>

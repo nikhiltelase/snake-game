@@ -7,12 +7,15 @@ let overAudio = document.getElementById("over-sound");
 let gameOver = document.querySelector(".game-over");
 let guidence = document.querySelector(".guidence");
 let scoreElement = document.querySelector(".score");
+let highSecoreElemnet = document.querySelector(".hight-score");
+
 
 bgAudio.volume = 0.2;
 overAudio.volume = 0.4;
 guidence.textContent = "Press Enter To Start Game"
 
 let score = 0;
+let highSecore = 0;
 let playAgain = false;
 let start = true;
 
@@ -148,6 +151,11 @@ function startGame(){
     let leftDistence = foodLeft - leftPostion;
     let numTopDistence = Number(String(topDistence).replace("-", ""));
     let numLeftDistence = Number(String(leftDistence).replace("-", ""));
+    console.log(foodTop)
+    console.log(topPostion)
+    if(foodTop == topPostion && foodLeft == leftPostion){
+        console.log("ture")
+    }
     // detect collistion with food
     if (numTopDistence < 15 && numLeftDistence < 15 ){
         refreshFood();
@@ -199,6 +207,10 @@ function resetSnake(){
     moveBody();
     refreshFood();
     gameOver.style.display = "none";
+    if (score > highSecore){
+        highSecore = score;
+        highSecoreElemnet.textContent = `High Score: ${highSecore}`;
+    }
     score = 0;
     scoreElement.textContent = `Score: ${score}`; 
     start = true;
@@ -209,7 +221,6 @@ function resetSnake(){
 let startGameButton = document.getElementById("startGame");
 startGameButton.addEventListener("click", () => {
     if (start){
-        console.log("start")
         startGame()
         start = false
     }
@@ -235,7 +246,6 @@ window.addEventListener('keydown', (event) => {
 
         case "Enter":
             if (start){
-                console.log("start")
                 startGame()
                 start = false
             }
@@ -261,3 +271,14 @@ window.addEventListener('keydown', (event) => {
             return;
     }
 });
+
+//when scree mobile hide guidece and show arrow buttons
+let guidContainer = document.querySelector(".guide-container");
+let arrowbuttons = document.querySelector(".arrow-buttons");
+
+const mql = window.matchMedia("(max-width: 500px)");
+
+if (mql.matches) {
+    guidContainer.style.display = "none";
+    arrowbuttons.style.display = "flex";
+}
