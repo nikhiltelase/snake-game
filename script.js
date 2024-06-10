@@ -259,7 +259,7 @@ window.addEventListener('keydown', (event) => {
     }
 });
 
-//when scree mobile hide guidece and show arrow buttons
+//when screen mobile hide guidece and show arrow buttons
 let guidContainer = document.querySelector(".guide-container");
 let arrowbuttons = document.querySelector(".arrow-buttons");
 
