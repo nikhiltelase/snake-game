@@ -7,7 +7,7 @@
     <title>snake game</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
@@ -35,16 +35,16 @@
            <div class="game-over w-full h-full absolute flex justify-center items-center flex-col" style="display: none;">
                 <h1 class="text-3xl text-green-600 font-bold">Game Over</h1>
                 <p id="playAgain" class="mb-4 text-center cursor-pointer">
-                    play again <img src="media/refresh.png" class="w-5 cursor-pointer inline hover:scale-110" alt="">
+                    play again <img src="{{ url_for('static', filename='media/refresh.png') }}" class="w-5 cursor-pointer inline hover:scale-110" alt="">
                 </p>
            </div>
 
            <!-- audio -->
            <section>
-                <audio src="media/background_music.mp3" id="bg-sound" loop></audio>
-                <audio src="media/eat_food.mp3" id="eat-sound"></audio>
-                <audio src="media/turning sound.mp3" id="turn-sound"></audio>
-                <audio src="media/game_over.mp3" id="over-sound"></audio>
+                <audio src="{{ url_for('static', filename='media/background_music.mp3') }}" id="bg-sound" loop></audio>
+                <audio src="{{ url_for('static', filename='media/eat_food.mp3') }}" id="eat-sound"></audio>
+                <audio src="{{ url_for('static', filename='media/turning sound.mp3') }}" id="turn-sound"></audio>
+                <audio src="{{ url_for('static', filename='media/game_over.mp3') }}" id="over-sound"></audio>
            </section>
 
         </div> 
@@ -66,7 +66,7 @@
             <button onclick="moveDown()" class="outline-none hover:bg-green-600 text-white bg-green-500 rounded-2xl text-4xl self-center down-button"><i class='bx bx-down-arrow-alt' ></i></button>
         </div>
     </main>
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>
