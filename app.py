@@ -23,6 +23,12 @@ class UserData(db.Model):
 with app.app_context():
     db.create_all()
 
+new_score = UserData(score=9)
+
+with app.app_context():
+    db.session.add(new_score)
+    db.session.commit()
+
 
 # @app.route("/")
 # def home():
