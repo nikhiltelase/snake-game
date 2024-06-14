@@ -11,10 +11,25 @@
 </head>
 
 <body>
-    <main class="h-screen w-full flex flex-col justify-center items-center">
-        <div class="flex justify-between w-[350px]">
+    <main class="main h-screen w-full flex flex-col justify-center items-center relative">
+        <!-- username -->
+        <div class="name-container h-screen w-full flex flex-col justify-center items-center absolute z-10" style="display: flex;">
+            <div class="bg-green-500 p-10 rounded-3xl">
+                <form action="" id="form">
+                    <div class="flex flex-col justify-center items-center">
+                        <label for="name" class="text-2xl ">Enter your name</label>
+                        <input type="text" id="name" name="name" class="m-2 h-10 w-60 rounded-lg ps-2 outline-none text-2xl" autofocus required>
+                        <button id="okey-button" class="hover:bg-green-700 hover:text-white rounded-2xl px-4 py-2 text-2xl mt-5 bg-white">Okey</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- show user name -->
+        <h1 class="text-2xl font-bold mb-2 text-green-500">👋Hi <span id="user-name"></span>!</h1>
+        <!-- scores -->
+        <div class="flex justify-between w-[350px] -z-10" >
             <h1 class="score text-2xl  text-green-500 ml-2">Score: 0</h1>
-            <h1 class="hight-score text-2xl  text-green-500 mr-2">High Score: 0</h1>
+            <h1 class="hight-score text-2xl  text-green-500 mr-2">High Score: {{ high_score }}</h1>
         </div>
         <div class="container w-[350px] h-[450px] relative rounded-2xl border border-green-500 shadow-2xl">
             <!-- snake -->
@@ -49,7 +64,7 @@
 
         </div> 
         <!-- start button -->
-        <button id="startGame" class="bg-green-500 hover:bg-green-600 outline-none rounded-lg p-3 mt-3 text-white font-bold shadow-2xl ">Start game</button>   
+        <button id="startGame" class="bg-green-500 hover:bg-green-600 outline-none rounded-lg p-3 mt-3 text-white font-bold shadow-2xl">Start game</button>   
         
         <div style="display: block;" class="guide-container">
             <p class="guidence text-center"></p>

@@ -15,9 +15,17 @@ overAudio.volume = 0.4;
 guidence.textContent = "Press Enter To Start Game"
 
 let score = 0;
-let highSecore = 0;
+var highSecore = 0;
+//geting high score from data base and set to high score
+async function getData(){
+    response = await fetch("/get_high_score");
+    data = await response.json();
+    highSecore = data.score;
+}
+getData()
+
 let playAgain = false;
-let start = true;
+let start = false;
 
 //move snake head
 let head = segments[0];
@@ -108,7 +116,7 @@ function extendSnake(){
 let foodLeft ;
 let foodTop ;
 function refreshFood(){
-    let foodArray = ["🍎", "🍍", "🍉", "🍑", "🍓", "🥝", "🍒", "🍈", "🥕", "🍏", "🍐"]
+    let foodArray = ["🍎", "🍍", "🍉", "🍑", "🍓", "🥝", "🍒", "🍈"]
     let randomIndex = Math.floor(Math.random() * foodArray.length);
     let food = document.querySelector(".food");
     foodTop = Math.floor(Math.random() * 408) ;
@@ -140,8 +148,7 @@ function startGame(){
     let leftDistence = foodLeft - leftPostion;
     let numTopDistence = Number(String(topDistence).replace("-", ""));
     let numLeftDistence = Number(String(leftDistence).replace("-", ""));
-    console.log(foodTop)
-    console.log(topPostion)
+
     if(foodTop == topPostion && foodLeft == leftPostion){
         console.log("ture")
     }
@@ -192,11 +199,21 @@ function resetSnake(){
     leftPostion = 0;
     snakeDirection = "right";
     moveBody();
-    refreshFood();
+    refreshFood(); 
     gameOver.style.display = "none";
+    console.log(highSecore);
+    
     if (score > highSecore){
         highSecore = score;
         highSecoreElemnet.textContent = `High Score: ${highSecore}`;
+        // saving highSecore in data base
+        fetch('/save_high_score', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({save_score: highSecore})
+        })
     }
     score = 0;
     scoreElement.textContent = `Score: ${score}`; 
@@ -218,6 +235,23 @@ let playAgainButton = document.getElementById("playAgain");
 playAgainButton.addEventListener("click", () => {
     resetSnake();
 });
+
+// user name
+let form = document.getElementById("form");
+let userName = document.getElementById("user-name");
+let formName = document.getElementById("name");
+let name_container = document.querySelector(".name-container");
+let main_container = document.querySelector(".name-container");
+main_container.style.backgroundColor = "rgba(1, 15, 2, 0.805)"
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    name_container.style.display = "none";
+    main_container.style.backgroundColor = "transparent";
+    start = true;
+    userName.textContent = formName.value;
+
+})
 
 
 //keybord controls for pc or laptop
