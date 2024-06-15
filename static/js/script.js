@@ -264,24 +264,56 @@ form.addEventListener("submit", (e) => {
     document.querySelector(".container").style.zIndex = "10";
 })
 
-// leaderboard
+// leaderboard and get all user data
 let leaderboard = document.querySelector(".leaderboard");
-let allUserName = document.querySelectorAll(".user-name");
+let leaderboardContainer = document.querySelector(".leaderboard-container")
 leaderboard.style.backgroundColor =  "rgba(1, 15, 2, 0.805)";
 
 document.querySelector(".leaderboard-button").addEventListener("click",() => {
     leaderboard.style.display = "flex";
     document.querySelector(".container").style.zIndex = "-10";
-    
-    allUserName.forEach((user) => {
-        if (user.textContent === formName.value) {
-            user.parentElement.style.backgroundColor = "#FF7F50";
-        }
+
+    fetch("/get_all_user")
+    .then(respone => respone.json())
+    .then(data => {
+        data.all_users.forEach(user => {
+            if (user.rank === 1){
+                leaderboardContainer.innerHTML += `<ul class="rank-container flex justify-between hover:bg-green-600 w-96 bg-green-500 text-white text-2xl px-4 py-2 rounded-2xl my-2">
+                        <li>🥇</li>
+                        <li>${user.name}</li>
+                        <li>${user.score}</li>
+                    </ul>`
+            }else if (user.rank === 2){
+                leaderboardContainer.innerHTML += `<ul class="rank-container flex justify-between hover:bg-green-600 w-96 bg-green-500 text-white text-2xl px-4 py-2 rounded-2xl my-2">
+                        <li>🥈</li>
+                        <li>${user.name}</li>
+                        <li>${user.score}</li>
+                    </ul>`
+            }else if (user.rank === 3){
+                leaderboardContainer.innerHTML += `<ul class="rank-container flex justify-between hover:bg-green-600 w-96 bg-green-500 text-white text-2xl px-4 py-2 rounded-2xl my-2">
+                        <li>🥉</li>
+                        <li>${user.name}</li>
+                        <li>${user.score}</li>
+                    </ul>`
+            }else{
+                leaderboardContainer.innerHTML += `<ul class="rank-container flex justify-between hover:bg-green-600 w-96 bg-green-500 text-white text-2xl px-4 py-2 rounded-2xl my-2">
+                        <li>${user.rank}</li>
+                        <li>${user.name}</li>
+                        <li>${user.score}</li>
+                    </ul>`
+            }
+            if (user.name === formName.value){
+                leaderboardContainer.lastChild.style.backgroundColor = "#FF7F50";
+            }
+        });
+        
     })
+
 })
 document.querySelector(".close-leaderboard").addEventListener("click", () => {
     leaderboard.style.display = "none";
     document.querySelector(".container").style.zIndex = "10";
+    leaderboardContainer.innerHTML = "";
 })
 
 

@@ -8,6 +8,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='media/favicon.ico') }}" type="image/x-icon">
 </head>
 
 <body>
@@ -26,41 +27,16 @@
         </div>
         <!-- leaderboard -->
          <div style="display: none;" class="leaderboard fixed h-screen z-10 w-full flex flex-col justify-center items-center">
-            <div class="leaderboard-container bg-green-200 p-2 h-screen rounded-2xl py-5 overflow-y-scroll mt-5 mb-2 scroll-smooth">
+            <div class="main-leaderboad-continer bg-green-200 p-2 h-screen rounded-2xl py-5 overflow-y-scroll mt-5 mb-2 scroll-smooth">
                 <h1 class="text-2xl font-bold text-center mb-5">🏆 Leaderboard 🏆</h1>
                 <ul class="flex justify-between min-w-96 px-2 py-2 my-2">
                     <li >Rank</li>
                     <li >Name</li>
                     <li >Score</li>
                 </ul>
-                {% for user in users_list %}
-                    {% if user.rank == 1 %}
-                    <ul class="rank-container flex justify-between hover:bg-green-600 w-96 bg-green-500 text-white text-2xl px-2 py-2 rounded-2xl my-2">
-                        <li class="text-4xl">🥇</li>
-                        <li class="user-name">{{ user.name }}</li>
-                        <li >{{ user.score }}</li>
-                    </ul>
-                    {% elif user.rank == 2 %}
-                    <ul class="rank-container flex justify-between hover:bg-green-600 w-96 bg-green-500 text-white text-2xl px-2 py-2 rounded-2xl my-2">
-                        <li class="text-3xl">🥈</li>
-                        <li class="user-name">{{ user.name }}</li>
-                        <li>{{ user.score }}</li>
-                    </ul>
-                    {% elif user.rank == 3 %}
-                    <ul class="rank-container flex justify-between hover:bg-green-600 w-96 bg-green-500 text-white text-2xl px-2 py-2 rounded-2xl my-2">
-                        <li class="text-3xl">🥉</li>
-                        <li class="user-name">{{ user.name }}</li>
-                        <li>{{ user.score }}</li>
-                    </ul>
-                    {% else %}
-                    <ul class="rank-container flex justify-between hover:bg-green-600 w-96 bg-green-500 text-white text-2xl px-4 py-2 rounded-2xl my-2">
-                        <li>{{ user.rank }}</li>
-                        <li class="user-name">{{ user.name }}</li>
-                        <li>{{ user.score }}</li>
-                    </ul>
-                    {% endif %}
-
-                {% endfor %}
+                <div class="leaderboard-container">
+                    
+                </div>
             </div>
             <button class="close-leaderboard text-5xl mb-4 hover:shadow-2xl active:text-4xl cursor-pointer">❎</button>
          </div>

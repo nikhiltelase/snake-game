@@ -51,8 +51,8 @@ def get_high_score():
         return jsonify({"score": user.score})
 
 
-@app.route("/")
-def home():
+@app.route("/get_all_user")
+def get_all_user():
     # get all user data
     all_data = db.session.execute(db.select(UserData).order_by(UserData.score)).scalars()
     # creating users list they contain user dict
@@ -67,8 +67,12 @@ def home():
         i -= 1
 
     users_list = list(reversed(users))
-    print(users_list)
-    return render_template("index.html", users_list=users_list)
+    return jsonify({'all_users': users_list})
+
+
+@app.route("/")
+def home():
+    return render_template("index.html")
 
 
 if __name__ == "__main__":

@@ -17,6 +17,6 @@
 .head{
     z-index: 99;
 }
-.leaderboard-container::-webkit-scrollbar{
+.main-leaderboad-continer::-webkit-scrollbar{
     display: none;
 }
