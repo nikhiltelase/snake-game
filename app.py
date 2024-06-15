@@ -28,28 +28,47 @@ with app.app_context():
 @app.route("/save_high_score", methods=['POST'])
 def save_high_score():
     data = request.json
-    save_score = data['save_score']
-    print(save_score)
+    score = data['score']
+    name = data['name']
     # save score in dataBase
-    user = db.session.execute(db.select(UserData).where(UserData.name == "nikhil")).scalar()
-    user.score = save_score
+    user = db.session.execute(db.select(UserData).where(UserData.name == name)).scalar()
+    user.score = score
     db.session.commit()
-
     return jsonify({'success': True})
 
 
-@app.route("/get_high_score")
+@app.route("/get_high_score", methods=['POST'])
 def get_high_score():
-    user = db.session.execute(db.select(UserData).where(UserData.name == "nikhil")).scalar()
-    return jsonify({"score": user.score})
+    data = request.json
+    name = data['user_name']
+    user = db.session.execute(db.select(UserData).where(UserData.name == name)).scalar()
+    if user == None:
+        new_user = UserData(name=name, score=0)
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify({"score": new_user.score})
+    else:
+        return jsonify({"score": user.score})
 
 
 @app.route("/")
 def home():
-    # get score
-    user = db.session.execute(db.select(UserData).where(UserData.name == "nikhil")).scalar()
-    high_score = user.score
-    return render_template("index.html", high_score=high_score)
+    # get all user data
+    all_data = db.session.execute(db.select(UserData).order_by(UserData.score)).scalars()
+    # creating users list they contain user dict
+    users = []
+    i = UserData.query.count()
+    for user in all_data:
+        user_dict = {}
+        user_dict["rank"] = i
+        user_dict["name"] = user.name
+        user_dict["score"] = user.score
+        users.append(user_dict)
+        i -= 1
+
+    users_list = list(reversed(users))
+    print(users_list)
+    return render_template("index.html", users_list=users_list)
 
 
 if __name__ == "__main__":

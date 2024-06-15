@@ -7,23 +7,15 @@ let overAudio = document.getElementById("over-sound");
 let gameOver = document.querySelector(".game-over");
 let guidence = document.querySelector(".guidence");
 let scoreElement = document.querySelector(".score");
-let highSecoreElemnet = document.querySelector(".hight-score");
+let highSecoreElemnet = document.querySelector(".high-score");
 
 
 bgAudio.volume = 0.2;
 overAudio.volume = 0.4;
-guidence.textContent = "Press Enter To Start Game"
+guidence.textContent = "Press Enter To Start Game";
 
 let score = 0;
-var highSecore = 0;
-//geting high score from data base and set to high score
-async function getData(){
-    response = await fetch("/get_high_score");
-    data = await response.json();
-    highSecore = data.score;
-}
-getData()
-
+let highSecore = 0;
 let playAgain = false;
 let start = false;
 
@@ -116,7 +108,7 @@ function extendSnake(){
 let foodLeft ;
 let foodTop ;
 function refreshFood(){
-    let foodArray = ["🍎", "🍍", "🍉", "🍑", "🍓", "🥝", "🍒", "🍈"]
+    let foodArray = ["🍎", "🍍", "🍉", "🥝", "🍒", "🍈"]
     let randomIndex = Math.floor(Math.random() * foodArray.length);
     let food = document.querySelector(".food");
     foodTop = Math.floor(Math.random() * 408) ;
@@ -191,6 +183,7 @@ function resetSnake(){
     <div class="snake">🟢</div>
     <div class="snake">🟢</div>
     `;
+    guidence.textContent = "Press Enter To Start Game";
     let currnetSegments = document.querySelectorAll(".snake");
     head = currnetSegments[0];
     head.style.top = "0px";
@@ -201,24 +194,41 @@ function resetSnake(){
     moveBody();
     refreshFood(); 
     gameOver.style.display = "none";
-    console.log(highSecore);
     
     if (score > highSecore){
         highSecore = score;
-        highSecoreElemnet.textContent = `High Score: ${highSecore}`;
+        highSecoreElemnet.textContent = highSecore;
+        console.log(formName.value)
+
         // saving highSecore in data base
         fetch('/save_high_score', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({save_score: highSecore})
+            body: JSON.stringify({name: formName.value, score: highSecore})
         })
     }
     score = 0;
     scoreElement.textContent = `Score: ${score}`; 
     start = true;
     playAgain = false;
+}
+//get user score from data base
+function getScore(name){
+    fetch('/get_high_score', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({user_name: name})
+    })
+    .then(response => response.json())
+    .then(data => {
+        highSecore = data.score;
+        highSecoreElemnet.textContent = data.score;
+
+    })
 }
 
 //start button
@@ -230,28 +240,50 @@ startGameButton.addEventListener("click", () => {
     }
 })
 
+
 //play agian button
 let playAgainButton = document.getElementById("playAgain");
 playAgainButton.addEventListener("click", () => {
     resetSnake();
 });
 
-// user name
+// user name form
 let form = document.getElementById("form");
 let userName = document.getElementById("user-name");
 let formName = document.getElementById("name");
 let name_container = document.querySelector(".name-container");
-let main_container = document.querySelector(".name-container");
-main_container.style.backgroundColor = "rgba(1, 15, 2, 0.805)"
+name_container.style.backgroundColor = "rgba(1, 15, 2, 0.805)"
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     name_container.style.display = "none";
-    main_container.style.backgroundColor = "transparent";
+    name_container.style.backgroundColor = "transparent";
     start = true;
     userName.textContent = formName.value;
-
+    getScore(formName.value)
+    document.querySelector(".container").style.zIndex = "10";
 })
+
+// leaderboard
+let leaderboard = document.querySelector(".leaderboard");
+let allUserName = document.querySelectorAll(".user-name");
+leaderboard.style.backgroundColor =  "rgba(1, 15, 2, 0.805)";
+
+document.querySelector(".leaderboard-button").addEventListener("click",() => {
+    leaderboard.style.display = "flex";
+    document.querySelector(".container").style.zIndex = "-10";
+    
+    allUserName.forEach((user) => {
+        if (user.textContent === formName.value) {
+            user.parentElement.style.backgroundColor = "#FF7F50";
+        }
+    })
+})
+document.querySelector(".close-leaderboard").addEventListener("click", () => {
+    leaderboard.style.display = "none";
+    document.querySelector(".container").style.zIndex = "10";
+})
+
 
 
 //keybord controls for pc or laptop
