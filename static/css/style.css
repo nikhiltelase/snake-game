@@ -1,17 +1,18 @@
+*{
+    user-select: none;
+}
 .snake{
     position: absolute;
     /* font-size: x-large; */
     transition-duration: 300ms;
     z-index: 9;
     text-shadow: 2px 2px 4px rgba(12, 194, 66, 0.456);
-    user-select: none; 
 }
 
 .food{
     position: absolute;
     font-size: 30px;
     text-shadow: 2px 2px 4px rgba(4, 57, 12, 0.679);
-    user-select: none; 
 }
 
 .head{

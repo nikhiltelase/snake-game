@@ -48,16 +48,17 @@ function moveHead(direction){
 }
 
 //move snake body
+//last segment apne aage wale segment ke position me badta chala jata hai
 function moveBody(){
     let currnetSegments = document.querySelectorAll(".snake");
-    let index = currnetSegments.length-1;
+    let lastSegmentIndex = currnetSegments.length-1;
     //index mean length of currnetSegments to ....3, 2, 1, 0 
-    while (index > 0) {
-        let newL = currnetSegments[index-1].style.left;
-        let newT = currnetSegments[index-1].style.top;
-        currnetSegments[index].style.left = newL;
-        currnetSegments[index].style.top = newT;
-        index -= 1;
+    while (lastSegmentIndex > 0) {
+        let newL = currnetSegments[lastSegmentIndex-1].style.left;
+        let newT = currnetSegments[lastSegmentIndex-1].style.top;
+        currnetSegments[lastSegmentIndex].style.left = newL;
+        currnetSegments[lastSegmentIndex].style.top = newT;
+        lastSegmentIndex -= 1;
     }
 }
 
@@ -65,28 +66,28 @@ function moveBody(){
 function moveUp(){
     if (snakeDirection !== "down"){
         snakeDirection = "up";
-        head.style.transform = "rotate(268deg)";
+        // head.style.transform = "rotate(268deg)";
         turnAudio.play();
     }
 }
 function moveDown(){
     if (snakeDirection !== "up"){
         snakeDirection = "down";
-        head.style.transform = "rotate(90deg)";
+        // head.style.transform = "rotate(90deg)";
         turnAudio.play();
     }
 }
 function moveLeft(){
     if (snakeDirection!== "right") {
         snakeDirection = "left";
-        head.style.transform = "rotate(180deg)";       
+        // head.style.transform = "rotate(180deg)";       
         turnAudio.play();
     }
 }
 function moveRight(){
     if (snakeDirection !== "left"){
         snakeDirection = "right";
-        head.style.transform = "rotate(0deg)";
+        // head.style.transform = "rotate(0deg)";
         turnAudio.play();
     }
 }
@@ -120,6 +121,7 @@ function refreshFood(){
 refreshFood();
 
 //detect collitsion with snake body
+//check head postion and body position if same then return true
 function detectBody(){
     let currnetSegments = document.querySelectorAll(".snake");
 
@@ -141,9 +143,6 @@ function startGame(){
     let numTopDistence = Number(String(topDistence).replace("-", ""));
     let numLeftDistence = Number(String(leftDistence).replace("-", ""));
 
-    if(foodTop == topPostion && foodLeft == leftPostion){
-        console.log("ture")
-    }
     // detect collistion with food
     if (numTopDistence < 15 && numLeftDistence < 15 ){
         refreshFood();
@@ -153,7 +152,7 @@ function startGame(){
         eatAudio.play()
     }
     //detect collition with wall
-    if (topPostion >= 425|| topPostion < -5 || leftPostion >= 332|| leftPostion < -5){
+    if (topPostion >= 425 || topPostion < -5 || leftPostion >= 332|| leftPostion < -5){
         gameOver.style.display = "flex";
         guidence.textContent = "Press Sift To Play Again.."
         playAgain = true;
@@ -197,9 +196,7 @@ function resetSnake(){
     
     if (score > highSecore){
         highSecore = score;
-        highSecoreElemnet.textContent = highSecore;
-        console.log(formName.value)
-
+        highSecoreElemnet.textContent = highSecore
         // saving highSecore in data base
         fetch('/save_high_score', {
             method: 'POST',
@@ -257,7 +254,6 @@ name_container.style.backgroundColor = "rgba(1, 15, 2, 0.805)"
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     name_container.style.display = "none";
-    name_container.style.backgroundColor = "transparent";
     start = true;
     userName.textContent = formName.value;
     getScore(formName.value)
@@ -267,10 +263,10 @@ form.addEventListener("submit", (e) => {
 // leaderboard and get all user data
 let leaderboard = document.querySelector(".leaderboard");
 let leaderboardContainer = document.querySelector(".leaderboard-container")
-leaderboard.style.backgroundColor =  "rgba(1, 15, 2, 0.805)";
 
 document.querySelector(".leaderboard-button").addEventListener("click",() => {
     leaderboard.style.display = "flex";
+    leaderboard.style.backgroundColor =  "rgba(1, 15, 2, 0.805)";
     document.querySelector(".container").style.zIndex = "-10";
 
     fetch("/get_all_user")
