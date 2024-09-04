@@ -4,13 +4,16 @@
 This project is a classic Snake game implemented with a modern twist. The game features a backend to handle user data, high scores, and a leaderboard, providing a personalized gaming experience.
 
 ## Watch The Video
-
 [![Video Thumbnail](https://img.youtube.com/vi/mpLLt3EGm0Y/hqdefault.jpg)](https://www.youtube.com/watch?v=mpLLt3EGm0Y)
 
 Click the image to watch the video.
 ## Check Out This LinkedIn Post
-
 [View the LinkedIn post here](https://www.linkedin.com/feed/update/urn:li:activity:7204754130039435264/)
+
+## Live Demo
+You can view the live version of the Snake game project at the following link:
+[Live Demo](https://snake-game-pi-lemon.vercel.app/)
+
 
 ## Features
 - **Personalized Experience**: Players can enter their name to fetch their high score.
