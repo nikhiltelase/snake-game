@@ -3,9 +3,10 @@
 ## Overview
 This project is a classic Snake game implemented with a modern twist. The game features a backend to handle user data, high scores, and a leaderboard, providing a personalized gaming experience.
 
-## Watch This Video
+## Watch The Video
 
 [![Video Thumbnail](https://img.youtube.com/vi/mpLLt3EGm0Y/hqdefault.jpg)](https://www.youtube.com/watch?v=mpLLt3EGm0Y)
+
 Click the image to watch the video.
 ## Check Out This LinkedIn Post
 
