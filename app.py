@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 
 class Base(DeclarativeBase):
@@ -9,7 +12,7 @@ class Base(DeclarativeBase):
 
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///User_dara.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DB_URL")
 
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
