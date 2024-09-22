@@ -6,7 +6,7 @@ This project is a classic Snake game implemented with a modern twist. The game f
 ## Watch The Video
 [![Video Thumbnail](https://img.youtube.com/vi/mpLLt3EGm0Y/hqdefault.jpg)](https://www.youtube.com/watch?v=mpLLt3EGm0Y)
 
-Click the image to watch the video.
+Click the image to watch the video.👆
 ## Check Out This LinkedIn Post
 [View the LinkedIn post here](https://www.linkedin.com/feed/update/urn:li:activity:7204754130039435264/)
 
